@@ -9,7 +9,7 @@
             v-show="index === questionsAnswered">
             <div class="question" >{{ question.q }}</div>
             <div class="answers" v-for="answer in question.answers" :key="answer.text">
-                <div class="answer" >{{answer.text}}</div>
+                <div class="answer" @click.prevent="selectAnswer(answer.is_correct)">{{answer.text}}</div>
             </div>
         </div>
     </div>
@@ -18,6 +18,12 @@
 <script>
 export default {
     props:['questions','questionsAnswered'],
+    emits:['question-answered'],
+    methods:{
+        selectAnswer(is_correct){
+            this.$emit("question-answered" , is_correct)
+        }
+    }
         
 }
 </script>
